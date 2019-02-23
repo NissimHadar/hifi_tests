@@ -20,7 +20,6 @@ var secondaryCameraHasBeenEnabled = false;
 
 var previousThrottleFPS;
 
-var downloadInProgress = false;
 var loadingContentIsStillDisplayed = false;
 
 const NUM_DIGITS = 5;
@@ -59,6 +58,8 @@ TestCase = function (name, path, func, usePrimaryCamera) {
 var currentTestCase = null;
 var currentRecursiveTestCompleted = false;
 
+var entityIDLoading = undefined;
+
 //returns n as a string, padded to length characters with the character ch
 function pad(n, length, ch) {
     ch = ch || '0';  // default is '0'
@@ -71,7 +72,6 @@ function pad(n, length, ch) {
 function onDownloadInfoChanged(info) {
     // After download is complete, the "LOADING CONTENT..." message is still displayed for a short time
     if (info.downloading.length == 0 && info.pending == 0) {
-        downloadInProgress = false;
         loadingContentIsStillDisplayed = true;
     }
 }
@@ -120,20 +120,25 @@ var autoTimeStep = 2000;
 var onRunAutoNext = function() {
     var timeStep = autoTimeStep;
 
-    // If not downloading then run the next step...
-    if (!downloadInProgress  && !loadingContentIsStillDisplayed) {
+    // If waiting for a model to load then check if the load has completed
+    if (entityIDLoading !== undefined) {
+        if (Entities.isLoaded(entityIDLoading)) {
+            console.warn("entity downloaded");
+            entityIDLoading = undefined;
+        } else {
+            console.warn("waiting for entity to download");
+        }
+    } else if (!loadingContentIsStillDisplayed) {
         // Only run next step if current step is complete
         if (!runNextStep()) {
             tearDownTest();
             return;
         }
-    } else if (!downloadInProgress) {
+    } else {
         // This assumes the message is displayed for not more than 4 seconds
         console.warn("Waiting for 'LOADING CONTENT...' message to be removed");
         timeStep = 4000;
         loadingContentIsStillDisplayed = false;
-    } else {
-        console.warn("Waiting for download to complete");
     }
 
     // and call itself after next timer
@@ -474,6 +479,10 @@ module.exports.addDelay = function (delaySeconds) {
             doAddStep(String(timeStepSeconds) + " seconds delay");
         }
     }
+}
+
+module.exports.waitForLoadComplete = function (entityID) {
+    entityIDLoading = entityID;
 }
 
 // Add steps to the test case, take snapshot
