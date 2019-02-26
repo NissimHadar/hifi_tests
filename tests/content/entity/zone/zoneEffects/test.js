@@ -8,6 +8,8 @@ nitpick.perform("Zone - Effects on Ambient Lights and Skybox", Script.resolvePat
     var avatarOriginPosition = nitpick.getOriginFrame();
     avatarOriginPosition = Vec3.sum(avatarOriginPosition, { x: 0.0, y: 1.0, z: 0.0 });
 
+    var previousSkeletonURL;
+
     var assetsRootPath = nitpick.getAssetsRootPath();
 
     var MODEL_DIMS = {"x":0.809423565864563,"y":0.9995689988136292,"z":0.8092837929725647};
@@ -194,6 +196,22 @@ nitpick.perform("Zone - Effects on Ambient Lights and Skybox", Script.resolvePat
         };
         marker3 = Entities.addEntity(marker3properties);
     });
+
+    nitpick.addStep("Setup avatar", function () {
+        // Use a specific avatar.  This is needed because we want the avatar's height to be fixed.
+        previousSkeletonURL = MyAvatar.skeletonModelURL;
+        MyAvatar.skeletonModelURL = "https://highfidelity.com/api/v1/commerce/entity_edition/813addb9-b985-49c8-9912-36fdbb57e04a.fst?certificate_id=MEUCIQDgYR2%2BOrCh5HXeHCm%2BkR0a2JniEO%2BY4y9tbApxCAPo4wIgXZEQdI4cQc%2FstAcr9tFT9k4k%2Fbuj3ufB1aB4W0tjIJc%3D";
+
+        previousScale = MyAvatar.scale;
+        MyAvatar.scale = 1.0;
+        MyAvatar.setEnableMeshVisible(true);
+
+        // Wait for skeleton to load (for now - only in test mode)
+        if (typeof Test !== 'undefined') {
+            Test.waitIdle();
+        }
+    });
+
     nitpick.addStepSnapshot("Verify no skybox");
     
     nitpick.addStep("Move forward", function () {
@@ -233,6 +251,10 @@ nitpick.perform("Zone - Effects on Ambient Lights and Skybox", Script.resolvePat
     nitpick.addStepSnapshot("Verify in dark zone");
         
     nitpick.addStep("Cleanup", function () {
+        MyAvatar.skeletonModelURL = previousSkeletonURL;
+        MyAvatar.scale = previousScale;
+        MyAvatar.clearJointsData();
+
         Entities.deleteEntity(object);
         Entities.deleteEntity(zone1);
         Entities.deleteEntity(zone2);
