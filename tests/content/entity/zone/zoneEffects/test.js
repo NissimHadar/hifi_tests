@@ -22,10 +22,6 @@ nitpick.perform("Zone - Effects on Ambient Lights and Skybox", Script.resolvePat
     var zone1;
     var zone2;
     var zone3;
-    var marker1;
-    var marker2;
-    var marker3;
-
 
     var objectName = "hifi_roughnessV00_metallicV_albedoV_ao";
     var objectProperties = {
@@ -45,10 +41,6 @@ nitpick.perform("Zone - Effects on Ambient Lights and Skybox", Script.resolvePat
     var zone1Dimensions = { x: 10.0, y: 10.0, z: 40.0};
     var zone2Dimensions = { x:  8.0, y: 10.0, z: 20.0};
     var zone3Dimensions = { x:  4.0, y: 10.0, z: 30.0};
-    
-    var marker1Dimensions = { x: 10.0, y: 0.01, z: 40.0};
-    var marker2Dimensions = { x:  8.0, y: 0.01, z: 20.0};
-    var marker3Dimensions = { x:  4.0, y: 0.01, z: 30.0};
 
     var BRIGHT_SKY_URL = assetsRootPath + 'skymaps/Sky_Day-Sun-Mid-photo.texmeta.json';
     var CLOUDY_SKY_URL = assetsRootPath + 'skymaps/ThickCloudsWater2.jpg';
@@ -56,7 +48,7 @@ nitpick.perform("Zone - Effects on Ambient Lights and Skybox", Script.resolvePat
 
     //Add test steps, These may be called via the timing mechanism for auto-testing,  
     // or stepped through with the space bar
-    nitpick.addStep("Setup object, zones and markers", function () {
+    nitpick.addStep("Setup object and zones", function () {
         var zone1properties = {
             lifetime: LIFETIME,
             type: "Zone",
@@ -155,46 +147,6 @@ nitpick.perform("Zone - Effects on Ambient Lights and Skybox", Script.resolvePat
             }
         };
         zone3 = Entities.addEntity(zone3properties);
-
-        // Show zone positions with rectangles
-        var marker1properties = {
-            lifetime: LIFETIME,
-            type: "Box",
-            name: "marker 1",
-            position: {x: MyAvatar.position.x, y: MyAvatar.position.y - 5.0, z: MyAvatar.position.z - 25.0},
-			rotation: Quat.fromPitchYawRollDegrees(0.0, 0.0, 0.0),
-            dimensions: marker1Dimensions,
-            "color": {"red": 200,"green": 0,"blue": 0},
-            visible: true,
-            userData: JSON.stringify({ grabbableKey: { grabbable: false } })
-        };
-        marker1 = Entities.addEntity(marker1properties);
-
-        var marker2properties = {
-            lifetime: LIFETIME,
-            type: "Box",
-            name: "marker 2",
-            position: {x: MyAvatar.position.x, y: MyAvatar.position.y - 5.0 + 0.01, z: MyAvatar.position.z - 25.0},
-			rotation: Quat.fromPitchYawRollDegrees(0.0, 0.0, 0.0),
-            dimensions: marker2Dimensions,
-            "color": {"red": 0,"green": 200,"blue":0},
-            visible: true,
-            userData: JSON.stringify({ grabbableKey: { grabbable: false } })
-        };
-        marker2 = Entities.addEntity(marker2properties);
-
-        var marker3properties = {
-            lifetime: LIFETIME,
-            type: "Box",
-            name: "marker 3",
-            position: {x: MyAvatar.position.x, y: MyAvatar.position.y - 5.0 + 0.02, z: MyAvatar.position.z - 25.0},
-			rotation: Quat.fromPitchYawRollDegrees(0.0, 0.0, 0.0),
-            dimensions: marker3Dimensions,
-            "color": {"red": 0,"green": 0,"blue": 200},
-            visible: true,
-            userData: JSON.stringify({ grabbableKey: { grabbable: false } })
-        };
-        marker3 = Entities.addEntity(marker3properties);
     });
 
     nitpick.addStep("Setup avatar", function () {
@@ -259,9 +211,6 @@ nitpick.perform("Zone - Effects on Ambient Lights and Skybox", Script.resolvePat
         Entities.deleteEntity(zone1);
         Entities.deleteEntity(zone2);
         Entities.deleteEntity(zone3);
-        Entities.deleteEntity(marker1);
-        Entities.deleteEntity(marker2);
-        Entities.deleteEntity(marker3);
     });
     
     var result = nitpick.runTest(testType);
