@@ -9,13 +9,15 @@ if (typeof depth === 'undefined') {
 
    nitpick.enableRecursive();
    nitpick.enableAuto();
+
+   if (typeof Test !== 'undefined') {
+       Test.wait(10000);
+   }
 } else {
    depth++
 }
 
-Script.include(testsRootPath + "protocol/testRecursive.js");
 Script.include(testsRootPath + "engine/testRecursive.js");
-Script.include(testsRootPath + "content/testRecursive.js");
 
 if (depth > 0) {
    depth--;
