@@ -264,9 +264,9 @@ setUpTest = function(testCase) {
         // In command line mode, maximize window size 
         // so that primary camera snapshots will have the correct size
         // This is not used on Mac (an AppleScript is used for that)
-        if (Test.getOperatingSystemType() === 'WINDOWS') {
+        if (PlatformInfo.getOperatingSystemType() === 'WINDOWS') {
             Test.showMaximized();
-        } else if (Test.getOperatingSystemType() === 'MACOS') {
+        } else if (PlatformInfo.getOperatingSystemType() === 'MACOS') {
             // Mitigate Mac LOD issues
             LODManager.setAutomaticLODAdjust(false);
             LODManager.setOctreeSizeScale(8000000);
@@ -289,10 +289,12 @@ setUpTest = function(testCase) {
         Menu.setIsOptionChecked("Desktop", true);
     }
 
-    // Set jitter to none on both cameras
-    Render.getConfig("RenderMainView.JitterCam").none();
-    Render.getConfig("SecondaryCameraJob.JitterCam").none();
-
+    if (PlatformInfo.getOperatingSystemType() === 'WINDOWS' || PlatformInfo.getOperatingSystemType() === 'MACOS') {
+        // Set jitter to none on both cameras
+        Render.getConfig("RenderMainView.JitterCam").none();
+        Render.getConfig("SecondaryCameraJob.JitterCam").none();
+    }
+    
     // This is needed to enable valid tests when Interface does not have focus
     // The problem is that models aren't rendered when there is no focus
     previousThrottleFPS = Menu.isOptionChecked("Throttle FPS If Not Focus");
@@ -403,9 +405,11 @@ tearDownTest = function() {
     // Disconnect callback
     AccountServices.downloadInfoChanged.disconnect(onDownloadInfoChanged);
     
-    // Restore TAA
-    Render.getConfig("RenderMainView.JitterCam").play();
-    Render.getConfig("SecondaryCameraJob.JitterCam").play();
+    if (PlatformInfo.getOperatingSystemType() === 'WINDOWS' || PlatformInfo.getOperatingSystemType() === 'MACOS') {
+        // Restore TAA
+        Render.getConfig("RenderMainView.JitterCam").play();
+        Render.getConfig("SecondaryCameraJob.JitterCam").play();
+    }
     
     // Restore as required
     Menu.setIsOptionChecked("Throttle FPS If Not Focus", previousThrottleFPS)
