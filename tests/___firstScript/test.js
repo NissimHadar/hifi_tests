@@ -4,7 +4,7 @@ var nitpick = createNitpick(Script.resolvePath("."));
 
 nitpick.perform("Initial setup", Script.resolvePath("."), "primary", function(testType) {
     nitpick.addStep("Set snapshot location folder", function () {
-        Snapshot.setSnapshotsLocation("/sdcard/snapshot");
+        Snapshot.setSnapshotsLocation("/sdcard/snapshots");
     });
 
     nitpick.addStep("Goto test domain", function () {
