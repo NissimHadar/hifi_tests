@@ -1,5 +1,5 @@
 // This is an automatically generated file, created by nitpick
-PATH_TO_THE_REPO_PATH_UTILS_FILE = "https://raw.githubusercontent.com/NissimHadar/hifi_tests/addGridTests/tests/utils/branchUtils.js";
+PATH_TO_THE_REPO_PATH_UTILS_FILE = "https://raw.githubusercontent.com/NissimHadar/hifi_tests/Quest/tests/utils/branchUtils.js";
 Script.include(PATH_TO_THE_REPO_PATH_UTILS_FILE);
 
 if (typeof depth === 'undefined') {
@@ -13,6 +13,7 @@ if (typeof depth === 'undefined') {
    depth++
 }
 
+Script.include(testsRootPath + "___firstScript/test.js");
 Script.include(testsRootPath + "engine/testRecursive.js");
 
 if (depth > 0) {
