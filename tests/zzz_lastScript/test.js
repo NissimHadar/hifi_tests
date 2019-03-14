@@ -2,17 +2,13 @@ if (typeof PATH_TO_THE_REPO_PATH_UTILS_FILE === 'undefined') PATH_TO_THE_REPO_PA
 Script.include(PATH_TO_THE_REPO_PATH_UTILS_FILE);
 var nitpick = createNitpick(Script.resolvePath("."));
 
-nitpick.perform("Initial setup", Script.resolvePath("."), "primary", function(testType) {
+nitpick.perform("Final teardown", Script.resolvePath("."), "primary", function(testType) {
     nitpick.addStep("Set snapshot location folder", function () {
         Snapshot.setSnapshotsLocation("/sdcard/snapshots");
     });
 
-    nitpick.addStep("Goto test domain", function () {
-        Window.location = "hifi://192.168.0.4/0,1,0";
-    });
-
-    nitpick.addStep("Hide the avatar", function () {
-        MyAvatar.setEnableMeshVisible(false);
+    nitpick.addStep("Show the avatar", function () {
+        MyAvatar.setEnableMeshVisible(true);
     }
 
     nitpick.runTest(testType);
