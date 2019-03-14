@@ -13,9 +13,11 @@ if (typeof depth === 'undefined') {
    depth++
 }
 
-Script.include(testsRootPath + "engine/testRecursive.js");
-Script.include(testsRootPath + "content/testRecursive.js");
-Script.include(testsRootPath + "aaa_firstScript/test.js");
+Script.include(testsRootPath + "content/entity/zone/zoneOrientation/test.js");
+Script.include(testsRootPath + "content/entity/zone/zoneEffects/test.js");
+Script.include(testsRootPath + "content/entity/zone/shadowControl/test.js");
+Script.include(testsRootPath + "content/entity/zone/create/test.js");
+Script.include(testsRootPath + "content/entity/zone/ambientLightInheritance/test.js");
 
 if (depth > 0) {
    depth--;
