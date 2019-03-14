@@ -8,7 +8,7 @@ nitpick.perform("Initial setup", Script.resolvePath("."), "primary", function(te
     });
 
     nitpick.addStep("Goto test domain", function () {
-        Window.location = "hifi://10.1.122.7/0,0,20";
+        Window.location = "hifi://192.168.0.10/0,1,0";
     });
 
     nitpick.runTest(testType);
