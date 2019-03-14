@@ -13,7 +13,7 @@ nitpick.perform("Initial setup", Script.resolvePath("."), "primary", function(te
 
     nitpick.addStep("Hide the avatar", function () {
         MyAvatar.setEnableMeshVisible(false);
-    }
+    });
 
     nitpick.runTest(testType);
 });
