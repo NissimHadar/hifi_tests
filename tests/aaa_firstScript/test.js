@@ -4,12 +4,11 @@ var nitpick = createNitpick(Script.resolvePath("."));
 
 nitpick.perform("Initial setup", Script.resolvePath("."), "primary", function(testType) {
     nitpick.addStep("Set snapshot location folder", function () {
-        ////Snapshot.setSnapshotsLocation("/sdcard/snapshots");
+        Snapshot.setSnapshotsLocation("/sdcard/snapshots");
     });
 
     nitpick.addStep("Goto test domain", function () {
-        ////Window.location = "hifi://192.168.0.10/0,1,0";
-        Window.location = "hifi://dev-mobile/1000,1000,1000";
+        Window.location = "hifi://192.168.0.10/0,1,0";
     });
 
     nitpick.runTest(testType);
