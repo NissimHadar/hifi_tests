@@ -2,7 +2,7 @@ if (typeof PATH_TO_THE_REPO_PATH_UTILS_FILE === 'undefined') PATH_TO_THE_REPO_PA
 Script.include(PATH_TO_THE_REPO_PATH_UTILS_FILE);
 var nitpick = createNitpick(Script.resolvePath("."));
 
-nitpick.perform("Zone - effects of orientation", Script.resolvePath("."), "secondary", function(testType) {
+nitpick.perform("Zone - effects of orientation", Script.resolvePath("."), "primary", function(testType) {
     var avatarOriginPosition = MyAvatar.position;
 
     var zonePosition = { x: avatarOriginPosition.x, y: avatarOriginPosition.y - 4.0, z: avatarOriginPosition.z - 17.5 };

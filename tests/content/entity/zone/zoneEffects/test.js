@@ -2,7 +2,7 @@ if (typeof PATH_TO_THE_REPO_PATH_UTILS_FILE === 'undefined') PATH_TO_THE_REPO_PA
 Script.include(PATH_TO_THE_REPO_PATH_UTILS_FILE);
 var nitpick = createNitpick(Script.resolvePath("."));
 
-nitpick.perform("Zone - Effects on Ambient Lights and Skybox", Script.resolvePath("."), "secondary", function(testType) {
+nitpick.perform("Zone - Effects on Ambient Lights and Skybox", Script.resolvePath("."), "primary", function(testType) {
     MyAvatar.orientation = Quat.fromPitchYawRollDegrees(0.0, 0.0, 0.0);
 
     var avatarOriginPosition = nitpick.getOriginFrame();

@@ -2,7 +2,7 @@ if (typeof PATH_TO_THE_REPO_PATH_UTILS_FILE === 'undefined') PATH_TO_THE_REPO_PA
 Script.include(PATH_TO_THE_REPO_PATH_UTILS_FILE);
 var nitpick = createNitpick(Script.resolvePath("."));
 
-nitpick.perform("Zone create", Script.resolvePath("."), "secondary", function(testType) {
+nitpick.perform("Zone create", Script.resolvePath("."), "primary", function(testType) {
     // Create the zone centered at the avatar position
     var pos = MyAvatar.position;
 
