@@ -13,8 +13,8 @@ if (typeof depth === 'undefined') {
    depth++
 }
 
-Script.include(testsRootPath + "___firstScript/test.js");
 Script.include(testsRootPath + "engine/testRecursive.js");
+Script.include(testsRootPath + "aaa_firstScript/test.js");
 
 if (depth > 0) {
    depth--;
