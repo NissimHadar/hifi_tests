@@ -9,7 +9,7 @@ nitpick.perform("Final teardown", Script.resolvePath("."), "primary", function(t
 
     nitpick.addStep("Show the avatar", function () {
         MyAvatar.setEnableMeshVisible(true);
-    }
+    });
 
     nitpick.runTest(testType);
 });
