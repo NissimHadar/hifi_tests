@@ -15,5 +15,9 @@ nitpick.perform("Initial setup", Script.resolvePath("."), "primary", function(te
         MyAvatar.setEnableMeshVisible(false);
     });
 
+    nitpick.addStep("Remove away message", function () {
+        MyAvatar.isAway = false;
+    });
+
     nitpick.runTest(testType);
 });
