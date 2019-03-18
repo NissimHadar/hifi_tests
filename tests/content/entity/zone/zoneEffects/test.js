@@ -156,7 +156,6 @@ nitpick.perform("Zone - Effects on Ambient Lights and Skybox", Script.resolvePat
 
         previousScale = MyAvatar.scale;
         MyAvatar.scale = 1.0;
-        MyAvatar.setEnableMeshVisible(true);
 
         // Wait for skeleton to load (for now - only in test mode)
         if (typeof Test !== 'undefined') {
