@@ -7,10 +7,6 @@ nitpick.perform("Initial setup", Script.resolvePath("."), "primary", function(te
         Snapshot.setSnapshotsLocation("/sdcard/snapshots");
     });
 
-    nitpick.addStep("Goto test domain", function () {
-        Window.location = "hifi://192.168.0.4/0,1,0";
-    });
-
     nitpick.addStep("Hide the avatar", function () {
         MyAvatar.setEnableMeshVisible(false);
     });
