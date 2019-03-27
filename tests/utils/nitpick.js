@@ -287,12 +287,12 @@ setUpTest = function(testCase) {
         // This is not used on Mac (an AppleScript is used for that)
         if (PlatformInfo.getOperatingSystemType() === 'WINDOWS') {
             Test.showMaximized();
-        } else if (PlatformInfo.getOperatingSystemType() === 'MACOS') {
-            // Mitigate Mac LOD issues
-            LODManager.setAutomaticLODAdjust(false);
-            LODManager.setOctreeSizeScale(8000000);
         }
     }
+
+    // Set LOD level
+    LODManager.setAutomaticLODAdjust(false);
+    LODManager.setOctreeSizeScale(8000000);
 
     if (!isManualMode()) {
         // Also, remove 2D overlays and mouse from the window, so that they won't appear in snapshots
